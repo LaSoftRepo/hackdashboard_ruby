@@ -12,19 +12,17 @@ Rails.application.routes.draw do
     end
   end
 
-	root 'home#index'
-
 	devise_for :admin
 	mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
 	resources :organizations
-
+  
 	devise_for :users,:path_prefix => 'api/v1', controllers: {
                                                 sessions: 'api/v1/users/sessions',
                                                 registrations: 'api/v1/users/registrations',
 																								passwords: 'api/v1/users/passwords'
                                             }
-
+  root 'home#index'
 	get 'api' => 'home#api'
 
 	namespace :api do
@@ -34,7 +32,4 @@ Rails.application.routes.draw do
       resources :stand_up_summaries
     end
   end
-
-
-
 end
